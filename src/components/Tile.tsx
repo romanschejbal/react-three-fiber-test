@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { MeshProps } from 'react-three-fiber';
 import { a, useSpring, config } from '@react-spring/three';
-import { HTML } from '@react-three/drei';
+import { Html } from '@react-three/drei';
 
 export default function Tile(
   props: MeshProps & {
@@ -46,13 +46,13 @@ export default function Tile(
         opacity={hovered.to([0, 1, 2], [1, 1, 0.5])}
       />
       {showMenu ? (
-        <HTML>
+        <Html>
           <div className="bg-white p-3 text-black mt-3">
             <ul className="">
               <li>Did not expect me down here, did you?</li>
             </ul>
           </div>
-        </HTML>
+        </Html>
       ) : null}
     </a.mesh>
   );
