@@ -752,6 +752,11 @@
   resolved "https://registry.yarnpkg.com/@types/normalize-package-data/-/normalize-package-data-2.4.0.tgz#e486d0d97396d79beedd0a6e33f4534ff6b4973e"
   integrity sha512-f5j5b/Gf71L+dbqxIpQ4Z2WlmI/mPJ0fOkGGmFgtb6sAu97EPczzbS3/tJKxmcYDj55OX6ssqwDAWOHIYDRDGA==
 
+"@types/pathfinding@^0.0.4":
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/@types/pathfinding/-/pathfinding-0.0.4.tgz#e878b8ef5c014743e95495afc4291df2b1c94726"
+  integrity sha512-W/gYSgsGaA6gofQNktySOL3ekUqgcrGmmS/XUdCMO+RgOkaqQVnk7yri1vbfU9Dun3jgQxsOphdbOlbNZlr4Nw==
+
 "@types/prettier@^2.0.0":
   version "2.1.5"
   resolved "https://registry.yarnpkg.com/@types/prettier/-/prettier-2.1.5.tgz#b6ab3bba29e16b821d84e09ecfaded462b816b00"

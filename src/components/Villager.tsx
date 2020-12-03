@@ -3,6 +3,16 @@ import * as THREE from 'three';
 import { a, useSpring } from '@react-spring/three';
 import { CanvasContext, useFrame } from 'react-three-fiber';
 import { config } from 'react-spring';
+import * as PF from 'pathfinding';
+import selectionState from '../state/selection';
+import { useRecoilState } from 'recoil';
+
+const pathfinder = new PF.AStarFinder({
+  diagonalMovement: PF.DiagonalMovement.IfAtMostOneObstacle,
+  heuristic: PF.Heuristic.euclidean,
+});
+
+console.log(pathfinder);
 
 export default function Villager(props: any) {
   const meshRef = React.useRef<THREE.Mesh>();
@@ -16,6 +26,7 @@ export default function Villager(props: any) {
     rotateZ: 0,
     config: config.wobbly,
   }));
+  const [selection, setSelection] = useRecoilState(selectionState);
 
   useFrame((ctx: CanvasContext, deltaTime: number) => {
     // if (ctx.camera.position.y < 20) ctx.camera.position.y += deltaTime;
@@ -87,16 +98,29 @@ export default function Villager(props: any) {
     };
   }, []);
 
+  const selected = selection.units.includes(props.name);
+
   return (
     <a.group
       ref={meshRef}
       position={props.position}
       rotation-x={rotateX}
       rotation-z={rotateZ}
+      onClick={(e) => {
+        e.stopPropagation();
+        setSelection((selection) =>
+          selected
+            ? {
+                ...selection,
+                units: selection.units.filter((id) => id !== props.name),
+              }
+            : { ...selection, units: [...selection.units, props.name] }
+        );
+      }}
     >
       <mesh position={[0, 1.35, 0]} castShadow>
         <boxBufferGeometry attach="geometry" args={[1, 1.5, 1]} />
-        <a.meshStandardMaterial color={'white'} />
+        <a.meshStandardMaterial color={selected ? 'blue' : 'white'} />
       </mesh>
     </a.group>
   );
