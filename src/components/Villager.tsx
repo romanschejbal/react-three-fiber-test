@@ -14,7 +14,11 @@ const pathfinder = new PF.AStarFinder({
 
 console.log(pathfinder);
 
-export default function Villager(props: any) {
+interface IProps {
+  name: string;
+}
+
+export default function Villager(props: IProps) {
   const meshRef = React.useRef<THREE.Mesh>();
   const direction = React.useRef(new THREE.Vector3());
   const speed = 7;
@@ -57,7 +61,7 @@ export default function Villager(props: any) {
 
   React.useEffect(() => {
     const keyDownHandler = (e: KeyboardEvent) => {
-      if (props.controlledPlayerRef.current !== props.name) {
+      if (!selection.units.includes(props.name)) {
         return;
       }
 
@@ -74,7 +78,7 @@ export default function Villager(props: any) {
     };
 
     const keyUpHandler = (e: KeyboardEvent) => {
-      if (props.controlledPlayerRef.current !== props.name) {
+      if (!selection.units.includes(props.name)) {
         return;
       }
 
@@ -96,7 +100,7 @@ export default function Villager(props: any) {
       window.removeEventListener('keydown', keyDownHandler);
       window.removeEventListener('keyup', keyUpHandler);
     };
-  }, []);
+  }, [selection]);
 
   const selected = selection.units.includes(props.name);
 
